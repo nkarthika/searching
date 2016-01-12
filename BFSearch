@@ -1,0 +1,46 @@
+//Breadth First Search
+
+class Main{
+
+Node bfSearch( Graph gr, Node root,  int num){
+    if(root.data == num) return root;
+    LinkedList<Node> q = new LinkedList<Node>();
+    
+    for(Node nd : gr.getNodes()){
+    nd.state = Currentstate.Unvisited;
+    }
+    
+    q.add(root);
+    Node chk;
+    
+    while(!q.isEmpty()) {
+     chk = q.poll();
+     if(chk!=null){
+     for (Node cur_node : chk.getAdjacent()){
+       if (cur_node.state == State.Unvisited) {
+         if(cur_node.data == num) return cur_Node;
+         else {cur_node.state=Currentsate.Visited;
+               q.add(cur_node);}
+        }
+      }
+      chk.state = State.Visited;
+    }
+
+    }
+
+    return null; // data not present in graph.
+
+}
+}
+
+Class Node {
+    int data;
+    Currentstate state;
+    
+    public Node(int n){
+    this.data=n;
+    this.state = Unvisited;
+    }
+  }
+  
+  public enum Currentstate { Unvisited, Visted; }
